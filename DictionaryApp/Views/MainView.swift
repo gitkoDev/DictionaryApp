@@ -70,7 +70,7 @@ struct MainView: View {
 						AddEntryView(appModel: appModel)
 					})
 					.fullScreenCover(isPresented: $isPractiseViewShown, content: {
-						PractiseView(appModel: appModel)
+						WordsForPracticeView(appModel: appModel)
 					})
 
 					.alert("New Folder", isPresented: $isAlertShown , actions: {

@@ -30,10 +30,17 @@ struct SingleSectionView: View {
 						Spacer()
 						Menu {
 							Button {
+								isAddEntryViewShown.toggle()
+							} label: {
+								Text("Add word")
+								Image(systemName: "plus")
+							}
+							
+							Button {
 								isPratiseViewShown.toggle()
 							} label: {
 								Text("Practise words")
-								Image(systemName: "book.fill")
+								Image(systemName: "book")
 							}
 
 							Button {
@@ -42,9 +49,10 @@ struct SingleSectionView: View {
 								Text("Delete folder")
 								Image(systemName: "trash")
 							}
+
 						} label: {
 							Image(systemName: "line.3.horizontal")
-								.font(.title)
+								.font(.title2)
 						}
 					}
 					
@@ -71,7 +79,7 @@ struct SingleSectionView: View {
 					AddEntryView(appModel: appModel, chosenSection: section.sectionName)
 				}
 				.fullScreenCover(isPresented: $isPratiseViewShown, content: {
-					PractiseView(appModel: appModel)
+					WordsForPracticeView(appModel: appModel)
 				})
 				.confirmationDialog("", isPresented: $isAlertShown) {
 					Button("Delete Folder", role: .destructive) {

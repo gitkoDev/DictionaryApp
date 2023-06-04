@@ -10,7 +10,7 @@ import SwiftUI
 struct AddEntryView: View {
 	@Environment(\.dismiss) var dismiss
 	@ObservedObject var appModel: AppModel
-	@State var chosenSection: String = "All words"
+	@State var chosenSection: String = "All words 2"
 
 	@State private var newWord: String = ""
 	@State private var newWordTranslation: String = ""
