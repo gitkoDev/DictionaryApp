@@ -12,18 +12,20 @@ struct MainView: View {
 	
 	@State private var isAddEntryViewShown: Bool = false
 	@State private var isPractiseViewShown: Bool = false
-	@State private var sectionName: String = ""
+	@State private var newSectionName: String = ""
 	
 	@State private var isAlertShown: Bool = false
 	
 	func addSection() {
 		withAnimation {
-			guard !sectionName.isEmpty else {
+			guard !newSectionName.isEmpty else {
 				return
 			}
 
-			appModel.allSections.insert(SingleSectionModel(sectionName: sectionName, isUsedForPractice: false), at: 0)
-			sectionName = ""
+			appModel.allSections.insert(SingleSectionModel(sectionName: newSectionName, isUsedForPractice: false), at: 0)
+			newSectionName = ""
+			
+			
 		}
 	}
 	
@@ -62,22 +64,19 @@ struct MainView: View {
 							} label: {
 									Image(systemName: "plus")
 							}
-
-
-
 					}
+//					MARK: Sheets and alerts
 					.sheet(isPresented: $isAddEntryViewShown, content: {
-						AddEntryView(appModel: appModel)
+						AddEntryView()
+							.environmentObject(appModel)
 					})
 					.fullScreenCover(isPresented: $isPractiseViewShown, content: {
-						WordsForPracticeView(appModel: appModel)
+						WordsForPracticeView()
+							.environmentObject(appModel)
 					})
-
 					.alert("New Folder", isPresented: $isAlertShown , actions: {
-						TextField("", text: $sectionName)
-						Button("Cancel", role: .cancel) {
-							
-						}
+						TextField("", text: $newSectionName)
+						Button("Cancel", role: .cancel) { }
 						Button("Ok") {
 							addSection()
 						}
@@ -87,7 +86,10 @@ struct MainView: View {
 					
 					.navigationTitle("Dictionary")
         }
+				.environmentObject(appModel)
     }
+	
+	
 }
 
 struct MainView_Previews: PreviewProvider {

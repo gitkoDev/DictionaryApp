@@ -26,8 +26,6 @@ struct SingleEntryView: View {
 					Text("\(entry.masteryPercentage.rawValue)%")
 						.font(.system(size: 13))
 				}
-				
-
 			}
     }
 }

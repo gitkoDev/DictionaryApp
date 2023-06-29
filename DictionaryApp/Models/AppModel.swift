@@ -15,6 +15,8 @@ class AppModel: ObservableObject {
 																SingleSectionModel(sectionName: "All words 4", isUsedForPractice: false)]
 //	@Published var allSections = [SingleSectionModel(sectionName: "All words")]
 	
+	@Published var sectionsForPractice = [SingleSectionModel]()
+	
 	func deleteSection(at index: Int) {
 		self.allSections.remove(at: index)
 	}

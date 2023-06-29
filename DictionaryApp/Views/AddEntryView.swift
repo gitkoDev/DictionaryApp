@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddEntryView: View {
 	@Environment(\.dismiss) var dismiss
-	@ObservedObject var appModel: AppModel
+	@EnvironmentObject var appModel: AppModel
 	@State var chosenSection: String = "All words 2"
 
 	@State private var newWord: String = ""
@@ -60,6 +60,7 @@ struct AddEntryView: View {
 
 struct AddEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEntryView(appModel: AppModel())
+        AddEntryView()
+				.environmentObject(AppModel())
     }
 }

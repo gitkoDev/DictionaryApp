@@ -13,6 +13,7 @@ struct SingleSectionView: View {
 	@State private var isPratiseViewShown: Bool = false
 	var section: SingleSectionModel
 	@State private var isAlertShown: Bool = false
+	var sectionToPractise: Int = 0
 	
 	func getSectionIndex() -> Int? {
 		if let sectionIndex = appModel.allSections.firstIndex(where: { section in
@@ -37,6 +38,10 @@ struct SingleSectionView: View {
 							}
 							
 							Button {
+//								Automatically select this section for practice when the WordsForPracticeView opens
+								if let sectionIndex = getSectionIndex() {
+									appModel.allSections[sectionIndex].isUsedForPractice = true
+								}
 								isPratiseViewShown.toggle()
 							} label: {
 								Text("Practise words")
@@ -76,10 +81,13 @@ struct SingleSectionView: View {
 					
 				}
 				.sheet(isPresented: $isAddEntryViewShown) {
-					AddEntryView(appModel: appModel, chosenSection: section.sectionName)
+					AddEntryView(chosenSection: section.sectionName)
+						.environmentObject(appModel)
 				}
 				.fullScreenCover(isPresented: $isPratiseViewShown, content: {
-					WordsForPracticeView(appModel: appModel)
+//					WordsForPracticeView(sectionsForPractice: [section])
+					WordsForPracticeView()
+						.environmentObject(appModel)
 				})
 				.confirmationDialog("", isPresented: $isAlertShown) {
 					Button("Delete Folder", role: .destructive) {
