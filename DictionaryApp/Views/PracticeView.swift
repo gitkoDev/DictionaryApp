@@ -10,13 +10,14 @@ import SwiftUI
 struct PracticeView: View {
 	@Environment(\.dismiss) var dismiss
 	@EnvironmentObject var appModel: AppModel
-	@State private var questionCount: Int = 1
-	@State private var questionWord = "test"
-	private var allWords = [String]()
-	private var allTranslations = [String]()
+	@State var questionCount: Int = 1
+	@State var questionWord = "test"
+	var allWords = [String]()
+	var allTranslations = [String]()
 	
     var body: some View {
 			NavigationStack {
+				Text(appModel.allSections[0].sectionName)
 				VStack {
 					Text("Question \(questionCount)")
 						.font(.title).bold()
@@ -26,7 +27,6 @@ struct PracticeView: View {
 						.padding()
 					ForEach(1..<5) { index in
 						Button {
-							
 						} label: {
 							Text("\(index)")
 							.frame(maxWidth: .infinity)
@@ -62,19 +62,28 @@ struct PracticeView: View {
 			.environmentObject(appModel)
 			.onAppear {
 				askQuestion()
+				getWords()
 			}
 			
 			
     }
 	
-	func askQuestion() {
-		questionWord = appModel.sectionsForPractice.randomElement()?.allSectionEntries.randomElement()?.word ?? ""
+	func getWords() {
+		print(appModel.sectionsForPractice.count)
 	}
+	
+	func askQuestion() {
+//		questionWord = appModel.sectionsForPractice.randomElement()?.allSectionEntries.randomElement()?.word ?? ""
+	
+	}
+	
+	
+	
 }
 
 struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticeView()
+			PracticeView()
 				.environmentObject(AppModel())
     }
 }

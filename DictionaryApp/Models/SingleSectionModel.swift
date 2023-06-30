@@ -27,10 +27,10 @@ import Foundation
 struct SingleSectionModel: Identifiable {
 	let id = UUID()
 	var sectionName: String
-	var allSectionEntries = [SingleEntryModel(word: "Test word", translation: "Тест", masteryPercentage: .notPractised),
-													 SingleEntryModel(word: "Test word", translation: "Тест", masteryPercentage: .notPractised),
-													 SingleEntryModel(word: "Test word", translation: "Тест", masteryPercentage: .notPractised),
-													 SingleEntryModel(word: "Test word", translation: "Тест", masteryPercentage: .notPractised)]
+	var allSectionEntries = [SingleEntryModel(word: "Test word 1", translation: "Тест", masteryPercentage: .notPractised),
+													 SingleEntryModel(word: "Test word 2", translation: "Тест", masteryPercentage: .notPractised),
+													 SingleEntryModel(word: "Test word 3", translation: "Тест", masteryPercentage: .notPractised),
+													 SingleEntryModel(word: "Test word 4", translation: "Тест", masteryPercentage: .notPractised)]
 	var isUsedForPractice: Bool 
 
 	mutating func deleteEntry(at offsets: IndexSet) {

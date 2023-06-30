@@ -13,7 +13,6 @@ class AppModel: ObservableObject {
 																SingleSectionModel(sectionName: "All words 2", isUsedForPractice: false),
 																SingleSectionModel(sectionName: "All words 3", isUsedForPractice: false),
 																SingleSectionModel(sectionName: "All words 4", isUsedForPractice: false)]
-//	@Published var allSections = [SingleSectionModel(sectionName: "All words")]
 	
 	@Published var sectionsForPractice = [SingleSectionModel]()
 	

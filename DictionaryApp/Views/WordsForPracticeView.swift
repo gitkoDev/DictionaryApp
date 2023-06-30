@@ -14,6 +14,7 @@ struct WordsForPracticeView: View {
 	@State private var areAllSectionsChosen: Bool = false
 	@State private var isPracticeViewShown: Bool = false
 	var wordsForPractise = [String]()
+	
 	@State private var isAlertPresented = false
 	
     var body: some View {
@@ -29,15 +30,18 @@ struct WordsForPracticeView: View {
 						.onTapGesture {
 							areAllSectionsChosen.toggle()
 							if areAllSectionsChosen {
+								appModel.sectionsForPractice.removeAll()
 								for section in appModel.allSections {
 									appModel.sectionsForPractice.append(section)
 								}
 							} else {
 								appModel.sectionsForPractice.removeAll()
+								print("removed all", appModel.sectionsForPractice)
 								for index in 0..<appModel.allSections.count {
 									appModel.allSections[index].isUsedForPractice = false
 								}
 							}
+							print(appModel.sectionsForPractice.count)
 						}
 						.padding()
 						
@@ -50,7 +54,10 @@ struct WordsForPracticeView: View {
 						 .onTapGesture {
 							 if areAllSectionsChosen == true {
 								 areAllSectionsChosen = false
-// We need to check the box back to true, if we don't, it will be uncheck like the rest of the items in the list, because they ALL get unchecked by default
+// We need to check the box back to true, if we don't, it will be unchecked like the rest of the items in the list, because they ALL get unchecked by default
+								 for index in 0..<appModel.allSections.count {
+									 appModel.allSections[index].isUsedForPractice = false
+								 }
 								 section.isUsedForPractice = true
 								 appModel.sectionsForPractice.removeAll()
 								 appModel.sectionsForPractice.append(section)
