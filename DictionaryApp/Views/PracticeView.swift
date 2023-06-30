@@ -12,8 +12,8 @@ struct PracticeView: View {
 	@EnvironmentObject var appModel: AppModel
 	@State var questionCount: Int = 1
 	@State var questionWord = "test"
-	var allWords = [String]()
-	var allTranslations = [String]()
+	@State private var allForeignWords = [String]()
+	@State var allTranslations = [String:String]()
 	
     var body: some View {
 			NavigationStack {
@@ -69,7 +69,23 @@ struct PracticeView: View {
     }
 	
 	func getWords() {
-		print(appModel.sectionsForPractice.count)
+
+		for section in appModel.sectionsForPractice {
+			for word in section.allSectionEntries {
+				//		Get an array of all the  words in english
+				if allForeignWords.contains(word.word) {
+					return
+				} else {
+					allForeignWords.append(word.word)
+				}
+
+				// Get a dictionary word:translation for comparison when the user answers
+				allTranslations[word.word] = word.translation
+				print(allForeignWords.count, allTranslations.count)
+			}
+		}
+
+		
 	}
 	
 	func askQuestion() {

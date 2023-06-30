@@ -9,10 +9,9 @@ import Foundation
 import SwiftUI
 
 class AppModel: ObservableObject {	
-	@Published var allSections = [SingleSectionModel(sectionName: "All words 1", isUsedForPractice: false),
-																SingleSectionModel(sectionName: "All words 2", isUsedForPractice: false),
-																SingleSectionModel(sectionName: "All words 3", isUsedForPractice: false),
-																SingleSectionModel(sectionName: "All words 4", isUsedForPractice: false)]
+	@Published var allSections = [SingleSectionModel(sectionName: "Denis", isUsedForPractice: false),
+																SingleSectionModel(sectionName: "Kate", isUsedForPractice: false),
+																SingleSectionModel(sectionName: "Cocos", isUsedForPractice: false)]
 	
 	@Published var sectionsForPractice = [SingleSectionModel]()
 	
