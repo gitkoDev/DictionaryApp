@@ -13,6 +13,8 @@ struct WordsForPracticeView: View {
 	@EnvironmentObject var appModel: AppModel
 	@State private var areAllSectionsChosen: Bool = false
 	@State private var isPracticeViewShown: Bool = false
+	var wordsForPractise = [String]()
+	@State private var isAlertPresented = false
 	
     var body: some View {
 			NavigationStack {
@@ -32,6 +34,9 @@ struct WordsForPracticeView: View {
 								}
 							} else {
 								appModel.sectionsForPractice.removeAll()
+								for index in 0..<appModel.allSections.count {
+									appModel.allSections[index].isUsedForPractice = false
+								}
 							}
 						}
 						.padding()
@@ -68,8 +73,17 @@ struct WordsForPracticeView: View {
 						HStack {
 							Spacer()
 							Button {
-								isPracticeViewShown.toggle()
-								print(appModel.sectionsForPractice.count)
+								var allWordsToPractise = 0
+								for section in appModel.sectionsForPractice {
+									allWordsToPractise += section.allSectionEntries.count
+									if allWordsToPractise >= 4 {
+										isPracticeViewShown.toggle()
+										return
+									}
+								}
+//								If we have fewer than 4 words to practise, show an alert message
+								isAlertPresented.toggle()
+
 							} label: {
 									Text("Practise")
 									.font(.headline)
@@ -99,6 +113,14 @@ struct WordsForPracticeView: View {
 				.fullScreenCover(isPresented: $isPracticeViewShown) {
 					PracticeView()
 				}
+				.alert("Not enough words", isPresented: $isAlertPresented) {
+					Button("Dismiss") {
+						
+					}
+				} message: {
+					Text("You need to choose at least 4 words for practise")
+				}
+
 			}
 //			Uncheck all boxes if practise view is dismissed
 			.onDisappear {
