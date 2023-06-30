@@ -29,15 +29,20 @@ struct PracticeView: View {
 							
 						} label: {
 							Text("\(index)")
-								.frame(maxWidth: .infinity)
-								.frame(height: 80)
-
-								.background(.mint)
+							.frame(maxWidth: .infinity)
+							.frame(height: 40)
+							.font(.headline)
+							.foregroundColor(.white)
+							.padding()
+							.padding(.horizontal)
+							.background(.blue)
+							.clipShape(RoundedRectangle(cornerRadius: 10))
 						}
 						.clipShape(
 							RoundedRectangle(cornerRadius: 10)
 						)
 						.padding(.horizontal)
+						.padding(.vertical, 2)
 
 
 					}
